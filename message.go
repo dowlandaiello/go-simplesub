@@ -19,7 +19,7 @@ type Message struct {
 
 // MessageFromBytes attempts to decode a message from a given byte slice.
 func MessageFromBytes(b []byte) (*Message, error) {
-	var buffer *Message // Init message buffer
+	buffer := new(Message) // Init message buffer
 
 	if err := json.Unmarshal(b, buffer); err != nil { // Check for errors
 		return &Message{}, err // Return found error
@@ -28,8 +28,8 @@ func MessageFromBytes(b []byte) (*Message, error) {
 	return buffer, nil // Return decoded message
 }
 
-// ToBytes serializes a given message to a byte slice.
-func (message *Message) ToBytes() ([]byte, error) {
+// Bytes serializes a given message to a byte slice.
+func (message *Message) Bytes() ([]byte, error) {
 	return json.Marshal(*message) // Return encoded
 }
 
