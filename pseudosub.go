@@ -5,6 +5,7 @@
 package pseudosub
 
 import (
+	inet "github.com/libp2p/go-libp2p-net"
 	routed "github.com/libp2p/go-libp2p/p2p/host/routed"
 )
 
@@ -14,14 +15,15 @@ import (
 // all pub/sub related operations.
 type PseudoSub struct {
 	Host *routed.RoutedHost `json:"host"` // Working host
-}
 
-// Option represents a pseudosub configuration option.
-type Option func(*PseudoSub) error
+	RootRoutePath string `json:"root_path"` // Root route path
+
+	Handlers map[string]func(inet.Stream) // Message handlers
+}
 
 /* BEGIN EXPORTED METHODS */
 
-// NewPseudoSub initializes a new PseudoSub, and sets up all necessary 
+// NewPseudoSub initializes a new PseudoSub, and sets up all necessary
 func NewPseudoSub(host *routed.RoutedHost, opts ...Option) (*PseudoSub, error) {
 	sub := &PseudoSub{
 		Host: host, // Set host
@@ -30,7 +32,7 @@ func NewPseudoSub(host *routed.RoutedHost, opts ...Option) (*PseudoSub, error) {
 	err := sub.applyOptions(opts) // Apply options
 
 	if err != nil { // Check for errors
-		return &PseudoSub{}, err // Return found error		
+		return &PseudoSub{}, err // Return found error
 	}
 
 	return sub, nil // Return initialized sub
