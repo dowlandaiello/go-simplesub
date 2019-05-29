@@ -15,8 +15,8 @@ import (
 
 /* BEGIN EXPORTED METHODS */
 
-// TestNewPseudoSubWithRoutePrefix tests the functionality of the WithRoutePrefix option.
-func TestNewPseudoSubWithRoutePrefix(t *testing.T) {
+// TestWithRoutePrefix tests the functionality of the WithRoutePrefix option.
+func TestWithRoutePrefix(t *testing.T) {
 	ctx, cancel := context.WithCancel(context.Background()) // Initialize context
 
 	defer cancel() // Cancel
