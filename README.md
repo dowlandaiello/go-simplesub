@@ -78,3 +78,21 @@ func handler(stream inet.Stream, message *simplesub.Message) {
     fmt.Printf("Received message: %s", string(message.Data)) // Log received
 }
 ```
+
+## Configuration
+
+### Route Prefixes
+
+By default, all simplesub routes are registered under `/`.
+Should one wish to add a prefix to such a route, simply pass the `WithRoutePrefix` option function
+to the simplesub constructor.
+
+Example:
+
+```Go
+sub, err := simplesub.NewSimpleSub(routedHost, simplesub.WithRoutePrefix("test_net")) // Initialize sub
+
+if err != nil { // Check for errors
+    panic(err) // Panic
+}
+```
