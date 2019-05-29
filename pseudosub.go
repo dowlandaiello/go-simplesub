@@ -35,6 +35,12 @@ func NewPseudoSub(host *routed.RoutedHost, opts ...Option) (*PseudoSub, error) {
 		return &PseudoSub{}, err // Return found error
 	}
 
+	err = sub.setupStreamHandlers() // Setup stream handlers
+
+	if err != nil { // Check for errors
+		return &PseudoSub{}, err // Return found error
+	}
+
 	return sub, nil // Return initialized sub
 }
 
