@@ -6,6 +6,7 @@ package simplesub
 
 import (
 	"bufio"
+	"bytes"
 	"fmt"
 	"reflect"
 
@@ -32,6 +33,8 @@ func (sub *SimpleSub) handleReceiveSub(stream inet.Stream) {
 	if err != nil { // Check for errors
 		return // Stop execution
 	}
+
+	b = bytes.Trim(b, "\n") // Remove newline
 
 	message, err := MessageFromBytes(b) // Decode message
 
