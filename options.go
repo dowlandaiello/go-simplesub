@@ -4,6 +4,8 @@
 // own routing solutions (e.g. kadDHT).
 package pseudosub
 
+import "strings"
+
 // Option represents a pseudosub configuration option.
 type Option func(*PseudoSub) error
 
@@ -14,7 +16,13 @@ type Option func(*PseudoSub) error
 // different nodes in a network, or partition such networks.
 func WithRoutePrefix(prefix string) Option {
 	return func(sub *PseudoSub) error {
-		sub.RootRoutePath = prefix // Set prefix
+		prefixCpy := prefix // Copy prefix
+
+		if !strings.Contains(prefix, "/") { // Check has no slash
+			prefixCpy = "/" + prefixCpy // Prepend slash
+		}
+
+		sub.RootRoutePath = prefixCpy // Set prefix
 
 		return nil // No error occurred, return nil
 	}
