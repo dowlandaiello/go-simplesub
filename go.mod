@@ -1,4 +1,4 @@
-module github.com/dowlandaiello/go-pseudosub
+module github.com/dowlandaiello/go-simplesub
 
 go 1.12
 
