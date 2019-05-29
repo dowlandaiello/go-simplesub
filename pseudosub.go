@@ -1,8 +1,8 @@
-// Package pseudosub implements a pub/sub messaging system through the libp2p
+// Package simplesub implements a pub/sub messaging system through the libp2p
 // routed.RoutedHost interface. In contrast with the standard libp2p pub/sub
-// package, pseudosub has the advantage of letting developers opt for their
+// package, simplesub has the advantage of letting developers opt for their
 // own routing solutions (e.g. kadDHT).
-package pseudosub
+package simplesub
 
 import (
 	inet "github.com/libp2p/go-libp2p-net"

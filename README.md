@@ -1,6 +1,6 @@
-# go-pseudosub
+# go-simplesub
 
-A pub/sub messaging system built on top of the libp2p routed.RoutedHost interface.
+A minimalistic, yet powerful pubsub messaging system built on top of libp2p.
 
 ## Rationale
 
@@ -14,5 +14,5 @@ for some use cases (those that utilize a DHT or any sort of routing in particula
 ## Installation
 
 ```zsh
-go get github.com/dowlandaiello/go-pseudosub
+go get github.com/dowlandaiello/go-simplesub
 ```
