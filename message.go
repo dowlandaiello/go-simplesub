@@ -8,7 +8,7 @@ import (
 	"encoding/json"
 )
 
-// Message outlines a pseudosub message.
+// Message outlines a simplesub message.
 type Message struct {
 	Topic string `json:"topic"` // Message topic
 

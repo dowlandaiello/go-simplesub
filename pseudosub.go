@@ -9,11 +9,11 @@ import (
 	routed "github.com/libp2p/go-libp2p/p2p/host/routed"
 )
 
-// PseudoSub implements the standard pseudosub pub/sub messaging
-// system. The pseudosub type is in many ways analogous
+// SimpleSub implements the standard simplesub pub/sub messaging
+// system. The simplesub type is in many ways analogous
 // to the host type in libp2p--it serves as a central hub for
 // all pub/sub related operations.
-type PseudoSub struct {
+type SimpleSub struct {
 	Host *routed.RoutedHost `json:"host"` // Working host
 
 	RootRoutePath string `json:"root_path"` // Root route path
@@ -23,29 +23,29 @@ type PseudoSub struct {
 
 /* BEGIN EXPORTED METHODS */
 
-// NewPseudoSub initializes a new PseudoSub, and sets up all necessary
-func NewPseudoSub(host *routed.RoutedHost, opts ...Option) (*PseudoSub, error) {
-	sub := &PseudoSub{
+// NewSimpleSub initializes a new SimpleSub, and sets up all necessary stream handlers.
+func NewSimpleSub(host *routed.RoutedHost, opts ...Option) (*SimpleSub, error) {
+	sub := &SimpleSub{
 		Host: host, // Set host
-	} // Initialize pseudosub
+	} // Initialize simplesub
 
 	err := sub.applyOptions(opts) // Apply options
 
 	if err != nil { // Check for errors
-		return &PseudoSub{}, err // Return found error
+		return &SimpleSub{}, err // Return found error
 	}
 
 	err = sub.setupStreamHandlers() // Setup stream handlers
 
 	if err != nil { // Check for errors
-		return &PseudoSub{}, err // Return found error
+		return &SimpleSub{}, err // Return found error
 	}
 
 	return sub, nil // Return initialized sub
 }
 
 // Subscribe subscribes to a given topic.
-func (sub *PseudoSub) Subscribe(topic string, handler func(inet.Stream)) {
+func (sub *SimpleSub) Subscribe(topic string, handler func(inet.Stream)) {
 	sub.Handlers[topic] = handler // Set handler
 }
 
@@ -54,7 +54,7 @@ func (sub *PseudoSub) Subscribe(topic string, handler func(inet.Stream)) {
 /* BEGIN INTERNAL METHODS */
 
 // applyOptions applies all provided options to the given sub.
-func (sub *PseudoSub) applyOptions(opts []Option) error {
+func (sub *SimpleSub) applyOptions(opts []Option) error {
 	for _, opt := range opts { // Iterate through options
 		err := sub.applyOption(opt) // Apply option
 
@@ -67,7 +67,7 @@ func (sub *PseudoSub) applyOptions(opts []Option) error {
 }
 
 // applyOption applies the provided option to the given sub.
-func (sub *PseudoSub) applyOption(opt Option) error {
+func (sub *SimpleSub) applyOption(opt Option) error {
 	return opt(sub) // Apply option
 }
 

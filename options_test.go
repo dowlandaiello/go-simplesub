@@ -42,7 +42,7 @@ func TestWithRoutePrefix(t *testing.T) {
 
 	routedHost := routed.Wrap(host, dht) // Wrap host
 
-	sub, err := NewPseudoSub(routedHost, WithRoutePrefix("test")) // Initialize sub
+	sub, err := NewSimpleSub(routedHost, WithRoutePrefix("test")) // Initialize sub
 
 	if err != nil { // Check for errors
 		t.Fatal(err) // Panic

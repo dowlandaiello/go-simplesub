@@ -15,8 +15,8 @@ import (
 
 /* BEGIN EXPORTED METHODS */
 
-// NewPseudoSub tests the functionality of the NewPseudoSub helper method.
-func TestNewPseudoSub(t *testing.T) {
+// TestNewSimpleSub tests the functionality of the NewSimpleSub helper method.
+func TestNewSimpleSub(t *testing.T) {
 	ctx, cancel := context.WithCancel(context.Background()) // Initialize context
 
 	defer cancel() // Cancel
@@ -42,7 +42,7 @@ func TestNewPseudoSub(t *testing.T) {
 
 	routedHost := routed.Wrap(host, dht) // Wrap host
 
-	sub, err := NewPseudoSub(routedHost) // Initialize sub
+	sub, err := NewSimpleSub(routedHost) // Initialize sub
 
 	if err != nil { // Check for errors
 		t.Fatal(err) // Panic

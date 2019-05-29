@@ -16,15 +16,15 @@ import (
 /* BEGIN INTERNAL METHODS */
 
 // setupStreamHandlers sets up all the required stream
-// handlers for proper pseudosub function.
-func (sub *PseudoSub) setupStreamHandlers() error {
+// handlers for proper simplesub function.
+func (sub *SimpleSub) setupStreamHandlers() error {
 	sub.Host.SetStreamHandler(protocol.ID(fmt.Sprintf("%s/sub", sub.RootRoutePath)), sub.handleReceiveSub) // Set sub handler
 
 	return nil // No error occurred, return nil
 }
 
 // handleReceiveSub handles a received message (i.e. peer published).
-func (sub *PseudoSub) handleReceiveSub(stream inet.Stream) {
+func (sub *SimpleSub) handleReceiveSub(stream inet.Stream) {
 	reader := bufio.NewReader(stream) // Init reader
 
 	b, err := reader.ReadBytes('\n') // Read up to newline

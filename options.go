@@ -6,8 +6,8 @@ package simplesub
 
 import "strings"
 
-// Option represents a pseudosub configuration option.
-type Option func(*PseudoSub) error
+// Option represents a simplesub configuration option.
+type Option func(*SimpleSub) error
 
 /* BEGIN EXPORTED METHODS */
 
@@ -15,7 +15,7 @@ type Option func(*PseudoSub) error
 // Such an option can used primarily to differentiate between
 // different nodes in a network, or partition such networks.
 func WithRoutePrefix(prefix string) Option {
-	return func(sub *PseudoSub) error {
+	return func(sub *SimpleSub) error {
 		prefixCpy := prefix // Copy prefix
 
 		if !strings.Contains(prefix, "/") { // Check has no slash
