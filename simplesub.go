@@ -24,7 +24,7 @@ type SimpleSub struct {
 
 	RootRoutePath string `json:"root_path"` // Root route path
 
-	Handlers map[string]func(inet.Stream) // Message handlers
+	Handlers map[string]func(inet.Stream, *Message) // Message handlers
 }
 
 /* BEGIN EXPORTED METHODS */
@@ -51,7 +51,7 @@ func NewSimpleSub(host *routed.RoutedHost, opts ...Option) (*SimpleSub, error) {
 }
 
 // Subscribe subscribes to a given topic.
-func (sub *SimpleSub) Subscribe(topic string, handler func(inet.Stream)) {
+func (sub *SimpleSub) Subscribe(topic string, handler func(inet.Stream, *Message)) {
 	sub.Handlers[topic] = handler // Set handler
 }
 

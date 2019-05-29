@@ -29,6 +29,7 @@ import (
     dht "github.com/libp2p/go-libp2p-kad-dht"
     routed "github.com/libp2p/go-libp2p/p2p/host/routed"
     "github.com/dowlandaiello/go-simplesub"
+    inet "github.com/libp2p/go-libp2p-net"
 )
 
 func main() {
@@ -63,12 +64,17 @@ func main() {
         panic(err) // Panic
     }
 
-    sub.Subscribe("test_topic") // Subscribe
+    sub.Subscribe("test_topic", handler) // Subscribe
 
     err = sub.Publish(ctx, "test_topic", []byte("test")) // Publish to topic
 
     if err != nil { // Check for errors
         panic(err) // Panic
     }
+}
+
+// handler handles a new incoming stream.
+func handler(stream inet.Stream, message *simplesub.Message) {
+    fmt.Printf("Received message: %s", string(message.Data)) // Log received
 }
 ```

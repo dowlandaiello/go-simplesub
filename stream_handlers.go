@@ -43,7 +43,7 @@ func (sub *SimpleSub) handleReceiveSub(stream inet.Stream) {
 	}
 
 	if !reflect.ValueOf(sub.Handlers[message.Topic]).IsNil() && reflect.ValueOf(sub.Handlers[message.Topic]).IsValid() { // Ensure has handler
-		sub.Handlers[message.Topic](stream) // Call handler
+		sub.Handlers[message.Topic](stream, message) // Call handler
 	}
 }
 
