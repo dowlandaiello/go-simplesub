@@ -44,6 +44,11 @@ func NewPseudoSub(host *routed.RoutedHost, opts ...Option) (*PseudoSub, error) {
 	return sub, nil // Return initialized sub
 }
 
+// Subscribe subscribes to a given topic.
+func (sub *PseudoSub) Subscribe(topic string, handler func(inet.Stream)) {
+	sub.Handlers[topic] = handler // Set handler
+}
+
 /* END EXPORTED METHODS */
 
 /* BEGIN INTERNAL METHODS */
