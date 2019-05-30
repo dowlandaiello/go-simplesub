@@ -132,7 +132,7 @@ func (sub *SimpleSub) broadcast(ctx context.Context, topic string, data []byte) 
 		return err // Return found error
 	}
 
-	for _, peer := range sub.Host.Peerstore().Peers() { // Iterate through peers
+	for _, peer := range sub.Host.Network().Peers() { // Iterate through peers
 		if sub.Host.ID() == peer { // Check is not self
 			continue // Continue
 		}
